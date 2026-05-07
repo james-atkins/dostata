@@ -5,11 +5,11 @@ sysuse ///
 
 LOG
 
-. /* !!! statable: start of commands !!! */
+. /* !!! dostata: start of commands !!! */
 . sysuse ///
 >         auto
 (1978 Automobile Data)
-. /* !!! statable: end of commands !!! */
+. /* !!! dostata: end of commands !!! */
 
 OUTPUT
 

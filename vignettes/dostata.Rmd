@@ -1,8 +1,8 @@
 ---
-title: "Introduction to statable"
+title: "Introduction to dostata"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Introduction to statable}
+  %\VignetteIndexEntry{Introduction to dostata}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,27 +14,27 @@ knitr::opts_chunk$set(
 )
 
 tryCatch(
-  statable::stata_path(),
+  dostata::stata_path(),
   error = function(cnd) {
     knitr::opts_chunk$set(eval = FALSE)
   }
 )
 ```
 
-The aim of statable is to enable you to combine the strengths of both R and Stata into one seamless workflow.
-This document introduces you to statable’s basic functionality.
+The aim of dostata is to enable you to combine the strengths of both R and Stata into one seamless workflow.
+This document introduces you to dostata’s basic functionality.
 
-To start using statable, you must first load the package.
+To start using dostata, you must first load the package.
 
 ```{r setup}
-library(statable)
+library(dostata)
 ```
 
-<i class="fa fa-info-circle" style="color: #007bff;"></i> **Note: ** All statable functions start with the prefix `stata_`.
+<i class="fa fa-info-circle" style="color: #007bff;"></i> **Note: ** All dostata functions start with the prefix `stata_`.
 
 # Finding Stata
 
-In order to run, statable needs the path to your Stata executable.
+In order to run, dostata needs the path to your Stata executable.
 It should find this path automatically, but if it cannot you can specify it using `stata_path()`.
 This function may also be useful if you have multiple versions of Stata installed and want to run an older version.
 
@@ -62,13 +62,13 @@ stata_run(c("summarize", "regress price length weight"))
 See how the second set of commands used the `auto` dataset that we loaded with the first command.
 This works because, by default, `stata_run()` uses the same Stata session every time you run a command.
 This means all your data and results stay in one place, allowing you to easily build on your previous commands.
-If needed, you can also run multiple Stata sessions at the same time but most users can use statable without worrying about session management.
+If needed, you can also run multiple Stata sessions at the same time but most users can use dostata without worrying about session management.
 
 # Transferring Data
 
 ## Functions
 
-statable makes it is easy to transfer datasets between R and Stata.
+dostata makes it is easy to transfer datasets between R and Stata.
 This is useful when you want to use Stata’s powerful statistical capabilities on data that you initially cleaned and tidied in R.
 
 To pass data from R to Stata, use the function `stata_data_in()`.
@@ -92,16 +92,16 @@ mean(mtcars_stata$miles_per_gallon)
 
 ## Magic Macros
 
-In addition to these direct data transfer functions, statable provides a more general way to work with data between R and Stata using global macros.
+In addition to these direct data transfer functions, dostata provides a more general way to work with data between R and Stata using global macros.
 In Stata, global macros of the form `$R_dataframe_name` are used to reference R data frames.
-When you create a global macro in this format, statable automatically exports the specified R data frame to a `.dta` file, which is the file format used by Stata for datasets.
+When you create a global macro in this format, dostata automatically exports the specified R data frame to a `.dta` file, which is the file format used by Stata for datasets.
 The value of the global macro is then set to the path of this `.dta` file.
 
 This functionality allows you to seamlessly use R data frames with a variety of Stata commands that require a path to a dataset, such as `merge`, `joinby`, or `append`.
 For example, in the following code, `$R_mtcars` references the R data frame called `mtcars` in Stata, allowing you to `use` it and then `append` it.
 
 ```{r macros}
-# statable sets the gloal R_mtcars to be equal to the path of a dta file
+# dostata sets the gloal R_mtcars to be equal to the path of a dta file
 # containing the data frame mtcars.
 stata_run("use $R_mtcars, clear")
 stata_run("summarize")
@@ -112,3 +112,18 @@ stata_run("display _N")
 ```
 
 <i class="fa fa-info-circle" style="color: #007bff;"></i> **Note: ** R allows both variable names and column names to have dots in them but this is **not** allowed by Stata. You will have to rename them first.
+
+```{stata}
+sysuse auto, clear
+
+summarize
+
+clear
+```
+
+````{verbatim}
+```{stata}
+describe
+summarize mpg
+```
+````

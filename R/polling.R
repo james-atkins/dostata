@@ -2,21 +2,21 @@ new_session_polling <- function(session, stata_path) {
   stopifnot(typeof(session) == "environment")
   stopifnot(file.exists(stata_path))
 
-  dir <- tempfile("statable")
+  dir <- tempfile("dostata")
   dir.create(dir)
 
   run_file_path <- file.path(dir, "run")
   file.create(run_file_path)
 
   # Create the initial do file that starts polling for input files
-  do_file_path <- tempfile(pattern = "statable", fileext = ".do", tmpdir = dir)
-  file.copy(system.file("statable.do", package = "statable"), do_file_path)
+  do_file_path <- tempfile(pattern = "dostata", fileext = ".do", tmpdir = dir)
+  file.copy(system.file("dostata.do", package = "dostata"), do_file_path)
 
   log_path <- stata_log_path(do_file_path)
 
   input_file_path <- tempfile("input", fileext = ".do", tmpdir = dir)
 
-  env <- c(STATABLE_RUN = run_file_path, STATABLE_INPUT = input_file_path)
+  env <- c(DOSTATA_RUN = run_file_path, DOSTATA_INPUT = input_file_path)
   process <- new_stata_batch_process(stata_path, do_file_path, env)
 
   while (!file.exists(log_path)) Sys.sleep(.LOG_POLL_SLEEP)
@@ -72,8 +72,8 @@ run_commands.stata_polling <- function(session, commands, pre_commands) {
       END_COMMANDS,
       "}",
       # Clean up current input file and set path of next input file
-      r"(rm "$STATABLE_INPUT")",
-      sprintf('global STATABLE_INPUT "%s"', next_input_file_path)
+      r"(rm "$DOSTATA_INPUT")",
+      sprintf('global DOSTATA_INPUT "%s"', next_input_file_path)
     ),
     input_file
   )

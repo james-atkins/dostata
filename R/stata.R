@@ -1,8 +1,8 @@
 .LOG_POLL_SLEEP <- 1/50
 
 GLOBAL_MAX_LENGTH <- 32
-START_COMMANDS <- "/* !!! statable: start of commands !!! */"
-END_COMMANDS <- "/* !!! statable: end of commands !!! */"
+START_COMMANDS <- "/* !!! dostata: start of commands !!! */"
+END_COMMANDS <- "/* !!! dostata: end of commands !!! */"
 
 new_stata_batch_process <- function(stata_path, do_path, env = character()) {
   env <- c(Sys.getenv(), env)

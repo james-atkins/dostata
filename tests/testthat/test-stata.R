@@ -10,7 +10,7 @@ test_that("stata works", {
 
     expect_equal(mean(auto$price), 6165.2568)
 
-    expect_error(stata_run("this_is_an_invalid_command, oops", session = session), class = "statable_error_stata")
+    expect_error(stata_run("this_is_an_invalid_command, oops", session = session), class = "dostata_error_stata")
   })
 })
 

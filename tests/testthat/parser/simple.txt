@@ -4,10 +4,10 @@ version
 
 LOG
 
-. /* !!! statable: start of commands !!! */
+. /* !!! dostata: start of commands !!! */
 . version
 version 16.1
-. /* !!! statable: end of commands !!! */
+. /* !!! dostata: end of commands !!! */
 
 OUTPUT
 

@@ -1,17 +1,17 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# statable - Run Stata from R
+# dostata - Run Stata from R
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-statable is an R interface to Stata that lets you to combine the
+dostata is an R interface to Stata that lets you to combine the
 strengths of both R and Stata. You can prepare and manipulate your data
 in R, then quickly switch to Stata to perform specialised analyses, all
 without leaving your R environment.
 
-statable provides the following functionality:
+dostata provides the following functionality:
 
 - Run Stata commands from R
 - Transfer datasets between R and Stata
@@ -20,24 +20,24 @@ statable provides the following functionality:
 
 ## Installation
 
-`statable` is not currently on CRAN. You can install the development
-version from [GitHub](https://github.com/james-atkins/statable) with:
+`dostata` is not currently on CRAN. You can install the development
+version from [GitHub](https://github.com/james-atkins/dostata) with:
 
 ``` r
 # install.packages("pak")
-pak::pak("james-atkins/statable")
+pak::pak("james-atkins/dostata")
 ```
 
 ## Usage
 
 For more information, please read the [Getting Started
-guide](https://statable.jamesatkins.com/articles/statable.html).
+guide](https://dostata.jamesatkins.com/articles/dostata.html).
 
 ``` r
-# First, load the package. All statable commands start with `stata_`.
-library(statable)
+# First, load the package. All dostata commands start with `stata_`.
+library(dostata)
 
-# statable should find Stata automatically but, if necessary, you can
+# dostata should find Stata automatically but, if necessary, you can
 # manually set the path to the Stata executable
 # stata_path("C:/Program Files/Stata18/StataSE-64.exe")
 
@@ -92,7 +92,7 @@ stata_data_in(mtcars, clear = TRUE)
 stata_run("describe")
 #> . describe
 #> 
-#> Contains data from /tmp/Rtmp43oq7Y/statable132588723cb8a5/data_frame13258872ed1
+#> Contains data from /tmp/Rtmp43oq7Y/dostata132588723cb8a5/data_frame13258872ed1
 #> > 4a8.dta
 #>   obs:            32                          
 #>  vars:            11                          02 Sep 2024 18:08
@@ -118,8 +118,8 @@ stata_run("describe")
 stata_run("rename mpg miles_per_gallon")
 #> . rename mpg miles_per_gallon
 mtcars_stata <- stata_data_out()
-#> . save "/tmp/Rtmp43oq7Y/statable132588723cb8a5/stata1325882c7c2af9.dta"
-#> file /tmp/Rtmp43oq7Y/statable132588723cb8a5/stata1325882c7c2af9.dta saved
+#> . save "/tmp/Rtmp43oq7Y/dostata132588723cb8a5/stata1325882c7c2af9.dta"
+#> file /tmp/Rtmp43oq7Y/dostata132588723cb8a5/stata1325882c7c2af9.dta saved
 mean(mtcars_stata$miles_per_gallon)
 #> [1] 20.09062
 
@@ -156,9 +156,9 @@ stata_run("display _N")
 
 ## knitr
 
-`statable` integrates with knitr allowing you to run Stata code chunks
+`dostata` integrates with knitr allowing you to run Stata code chunks
 in knitr or rmarkdown documents. To do so, you must first import the
-package with `library(statable)` so knitr knows what to do with `stata`
+package with `library(dostata)` so knitr knows what to do with `stata`
 chunks. Then add a chunk like the following.
 
 ```` default

@@ -2,10 +2,10 @@ new_session_named_pipe <- function(session, stata_path) {
   stopifnot(typeof(session) == "environment")
   stopifnot(file.exists(stata_path))
 
-  dir <- tempfile("statable")
+  dir <- tempfile("dostata")
   dir.create(dir)
 
-  pipe_path <- tempfile(pattern = "statable", fileext = ".do", tmpdir = dir)
+  pipe_path <- tempfile(pattern = "dostata", fileext = ".do", tmpdir = dir)
   log_path <- stata_log_path(pipe_path)
 
   pipe <- processx::conn_create_fifo(pipe_path, write = TRUE)

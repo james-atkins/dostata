@@ -4,7 +4,7 @@ display "this is a very long command line this is a very long command line this 
 
 LOG
 
-. /* !!! statable: start of commands !!! */
+. /* !!! dostata: start of commands !!! */
 . display "this is a very long command line
 >  this is a very long command line this is
 >  a very long command line this is a very 
@@ -24,7 +24,7 @@ this is a very long command line this is a
 > ng command line this is a very long comma
 > nd line this is a very long command line 
 > this is a very long command line
-. /* !!! statable: end of commands !!! */
+. /* !!! dostata: end of commands !!! */
 
 OUTPUT
 

@@ -9,8 +9,8 @@ find_stata <- function() {
     find_stata_linux()
   } else {
     cli_abort(c(
-      x = "{os} is not supported by Stata and so {.pkg statable} cannot be used.",
-      i = "Use {.pkg statable} on Linux, Windows or macOS."
+      x = "{os} is not supported by Stata and so {.pkg dostata} cannot be used.",
+      i = "Use {.pkg dostata} on Linux, Windows or macOS."
     ))
   }
 }

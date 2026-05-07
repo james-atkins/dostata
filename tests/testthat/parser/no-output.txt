@@ -4,9 +4,9 @@ clear
 
 LOG
 
-. /* !!! statable: start of commands !!! */
+. /* !!! dostata: start of commands !!! */
 . clear
-. /* !!! statable: end of commands !!! */
+. /* !!! dostata: end of commands !!! */
 
 OUTPUT
 

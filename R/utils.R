@@ -4,10 +4,10 @@ abort_bug <- function(message, .envir = parent.frame()) {
   cli_abort(
     c(
       x = message,
-      i = "This is a bug in statable. Please file a {.href [GitHub issue](https://github.com/james-atkins/statable/issues)}."
+      i = "This is a bug in dostata. Please file a {.href [GitHub issue](https://github.com/james-atkins/dostata/issues)}."
     ),
     .envir = .envir,
-    class = "statable_error_bug"
+    class = "dostata_error_bug"
   )
 }
 
@@ -25,7 +25,7 @@ stop_stata <- function(code, message, call = NULL) {
     ),
     code = code,
     call = call,
-    class = "statable_error_stata"
+    class = "dostata_error_stata"
   )
 }
 

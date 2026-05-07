@@ -1,4 +1,4 @@
-Package: statable
+Package: dostata
 Type: Package
 Title: Run Stata Commands from R
 Version: 0.1.0
@@ -9,8 +9,8 @@ Description: An R to Stata interface that allows Stata commands to be executed
     Stata estimation results can be returned to R.
 License: MIT + file LICENSE
 Encoding: UTF-8
-URL: https://statable.jamesatkins.com, https://github.com/james-atkins/statable
-BugReports: https://github.com/james-atkins/statable/issues
+URL: https://github.com/james-atkins/dostata
+BugReports: https://github.com/james-atkins/dostata/issues
 Suggests: 
     rmarkdown,
     testthat (>= 3.0.0)

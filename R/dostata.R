@@ -9,7 +9,7 @@
 #' @export
 stata_path <- function(path = rlang::missing_arg()) {
   if (rlang::is_missing(path)) {
-    path <- getOption("statable.path")
+    path <- getOption("dostata.path")
 
     if (is.null(path)) {
       # Try and look for Stata
@@ -18,7 +18,7 @@ stata_path <- function(path = rlang::missing_arg()) {
       if (length(path) == 0) {
         cli_abort(c(
           x = "Cannot find a Stata executable.",
-          i = "Use {.fun statable::stata_path} to set the path to a Stata executable."
+          i = "Use {.fun dostata::stata_path} to set the path to a Stata executable."
         ))
       }
     }
@@ -27,7 +27,7 @@ stata_path <- function(path = rlang::missing_arg()) {
   } else {
     if (is.null(path)) {
       # Clear the options
-      options(statable.path = NULL)
+      options(dostata.path = NULL)
       return()
     }
 
@@ -43,7 +43,7 @@ stata_path <- function(path = rlang::missing_arg()) {
       cli_abort(c(x = "{.var path} must exist: cannot find {.file {path}}."))
     }
 
-    options(statable.path = path)
+    options(dostata.path = path)
     cli_inform(c(v = "Setting default Stata path"))
   }
 }
@@ -167,7 +167,7 @@ new_session <- function(session, stata_path) {
   } else {
     cli_abort(c(
       x = "Stata is not supported on this platform.",
-      i = "Run statable on Linux, Windows or macOS."
+      i = "Run dostata on Linux, Windows or macOS."
     ))
   }
 

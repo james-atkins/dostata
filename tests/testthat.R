@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(statable)
+library(dostata)
 
-test_check("statable")
+test_check("dostata")
