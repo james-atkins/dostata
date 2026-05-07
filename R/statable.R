@@ -59,24 +59,20 @@ stata_path <- function(path = rlang::missing_arg()) {
 stata_run <- function(commands, ..., session = stata_default_session(), env = parent.frame()) {
   check_dots_empty()
 
+  stata_exec(
+    commands,
+    session = session,
+    env = env,
+    callback_input = function(input) cli_code(input, language = "stata"),
+    callback_output = function(line) cli_verbatim(line),
+    callback_error = function(code, message) stop_stata(code, message, call = env)
+  )
+}
+
+stata_exec <- function(commands, session, env, callback_input, callback_output, callback_error) {
   commands <- clean_commands(commands)
   pre_commands <- make_pre_commands(session, commands, env)
-
-  # Send commands to Stata
   run_commands(session, commands, pre_commands)
-
-  callback_input <- function(input) {
-    cli_code(input, language = "stata")
-  }
-
-  callback_output <- function(line) {
-    cli_verbatim(line)
-  }
-
-  callback_error <- function(code, message) {
-    stop_stata(code, message, call = env)
-  }
-
   parse_log(
     commands,
     session$log_file,

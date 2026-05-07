@@ -13,9 +13,6 @@
 stata_evaluate <- function(commands, ..., session = stata_default_session(), env = parent.frame()) {
   check_dots_empty()
 
-  commands <- clean_commands(commands)
-  pre_commands <- make_pre_commands(session, commands, env)
-
   result <- stack()
   output <- stack()
 
@@ -26,30 +23,21 @@ stata_evaluate <- function(commands, ..., session = stata_default_session(), env
     }
   }
 
-  callback_input <- function(input) {
-    flush_output()
-    result$push(structure(list(src = input), class = "source"))
-  }
-
-  callback_output <- function(line) {
-    output$push(line)
-  }
-
-  callback_error <- function(code, message) {
-    flush_output()
-    error <- catch_cnd(stop_stata(code, message))
-    result$push(error)
-  }
-
-  run_commands(session, commands, pre_commands)
-
-  parse_log(
+  stata_exec(
     commands,
-    session$log_file,
-    session$process$is_alive,
-    callback_input,
-    callback_output,
-    callback_error
+    session = session,
+    env = env,
+    callback_input = function(input) {
+      flush_output()
+      result$push(structure(list(src = input), class = "source"))
+    },
+    callback_output = function(line) {
+      output$push(line)
+    },
+    callback_error = function(code, message) {
+      flush_output()
+      result$push(catch_cnd(stop_stata(code, message)))
+    }
   )
   flush_output()
 
