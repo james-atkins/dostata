@@ -9,7 +9,7 @@ Description: An R to Stata interface that allows Stata commands to be executed
     Stata estimation results can be returned to R.
 License: MIT + file LICENSE
 Encoding: UTF-8
-URL: https://github.com/james-atkins/dostata
+URL: https://dostata.jamesatkins.com, https://github.com/james-atkins/dostata
 BugReports: https://github.com/james-atkins/dostata/issues
 Suggests: 
     rmarkdown,

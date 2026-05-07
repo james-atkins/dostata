@@ -13,20 +13,19 @@ knitr::opts_chunk$set(
 )
 ```
 
-# dostata -  Run Stata from R
+# dostata -  Run Stata from R <img src="man/figures/logo.png" align="right" height="138" alt="dostata logo" />
 
 <!-- badges: start -->
 <!-- badges: end -->
 
-dostata is an R interface to Stata that lets you to combine the strengths of both R and Stata.
-You can prepare and manipulate your data in R, then quickly switch to Stata to perform specialised analyses, all without leaving your R environment.
-
-dostata provides the following functionality:
+dostata is an R interface to Stata that provides the following functionality:
 
 * Run Stata commands from R
 * Transfer datasets between R and Stata
 * Run Stata "chunks" in knitr or R Markdown documents
 * Work with multiple Stata sessions at the same time
+
+This allows you to import and tidy your data in R, then quickly switch to Stata to perform specialised analyses, without leaving your R environment.
 
 ## Installation
 

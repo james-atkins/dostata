@@ -29,5 +29,8 @@ reference:
   - stata_start_session
   - stata_close_session
   - stata_default_session
+- title: "Advanced"
+  contents:
+  - stata_evaluate
 
 

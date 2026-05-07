@@ -1,22 +1,23 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# dostata - Run Stata from R
+# dostata - Run Stata from R <img src="man/figures/logo.png" align="right" height="138" alt="dostata logo" />
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
-dostata is an R interface to Stata that lets you to combine the
-strengths of both R and Stata. You can prepare and manipulate your data
-in R, then quickly switch to Stata to perform specialised analyses, all
-without leaving your R environment.
-
-dostata provides the following functionality:
+dostata is an R interface to Stata that provides the following
+functionality:
 
 - Run Stata commands from R
 - Transfer datasets between R and Stata
 - Run Stata “chunks” in knitr or R Markdown documents
 - Work with multiple Stata sessions at the same time
+
+This allows you to import and tidy your data in R, then quickly switch
+to Stata to perform specialised analyses, without leaving your R
+environment.
 
 ## Installation
 
@@ -45,12 +46,12 @@ library(dostata)
 # All your data and results stay in one place, allowing you to easily build on
 # your previous commands.
 stata_run("sysuse auto")
-#> ℹ Started Stata session:
-#>   '/nix/store/hk6h0ak3ym85b771n6kvk1hcmh4b7rjv-user-environment/bin/stata-se'
-#> . sysuse auto
+#> ℹ Started Stata session: '/etc/profiles/per-user/james/bin/stata-se'
+#> sysuse auto
+#> 
 #> (1978 Automobile Data)
 stata_run(c("summarize", "regress price length weight"))
-#> . summarize
+#> summarize
 #> 
 #>     Variable |        Obs        Mean    Std. Dev.       Min        Max
 #> -------------+---------------------------------------------------------
@@ -68,7 +69,7 @@ stata_run(c("summarize", "regress price length weight"))
 #> -------------+---------------------------------------------------------
 #>   gear_ratio |         74    3.014865    .4562871       2.19       3.89
 #>      foreign |         74    .2972973    .4601885          0          1
-#> . regress price length weight
+#> regress price length weight
 #> 
 #>       Source |       SS           df       MS      Number of obs   =        74
 #> -------------+----------------------------------   F(2, 71)        =     18.91
@@ -88,14 +89,13 @@ stata_run(c("summarize", "regress price length weight"))
 # To pass data from R to Stata, you can use the function `stata_data_in()`
 data("mtcars")
 stata_data_in(mtcars, clear = TRUE)
-#> . use "$R_data_frame", clear
+#> use "$R_data_frame", clear
 stata_run("describe")
-#> . describe
+#> describe
 #> 
-#> Contains data from /tmp/Rtmp43oq7Y/dostata132588723cb8a5/data_frame13258872ed1
-#> > 4a8.dta
+#> Contains data from /tmp/RtmpEiVHmL/dostata26ecd599537f/data_frame26ecd55aebdcae.dta
 #>   obs:            32                          
-#>  vars:            11                          02 Sep 2024 18:08
+#>  vars:            11                          07 May 2026 07:43
 #> -------------------------------------------------------------------------------
 #>               storage   display    value
 #> variable name   type    format     label      variable label
@@ -116,10 +116,10 @@ stata_run("describe")
 
 # Likewise, `stata_data_out()` returns the current Stata dataset into R
 stata_run("rename mpg miles_per_gallon")
-#> . rename mpg miles_per_gallon
+#> rename mpg miles_per_gallon
 mtcars_stata <- stata_data_out()
-#> . save "/tmp/Rtmp43oq7Y/dostata132588723cb8a5/stata1325882c7c2af9.dta"
-#> file /tmp/Rtmp43oq7Y/dostata132588723cb8a5/stata1325882c7c2af9.dta saved
+#> save "/tmp/RtmpEiVHmL/dostata26ecd599537f/stata26ecd55308ba0e.dta"
+#> file /tmp/RtmpEiVHmL/dostata26ecd599537f/stata26ecd55308ba0e.dta saved
 mean(mtcars_stata$miles_per_gallon)
 #> [1] 20.09062
 
@@ -128,9 +128,9 @@ mean(mtcars_stata$miles_per_gallon)
 # This allows you to use data in R with a variety of Stata commands, such as
 # `merge`, `joinby` or `append`.
 stata_run("use $R_mtcars, clear")
-#> . use $R_mtcars, clear
+#> use $R_mtcars, clear
 stata_run("summarize")
-#> . summarize
+#> summarize
 #> 
 #>     Variable |        Obs        Mean    Std. Dev.       Min        Max
 #> -------------+---------------------------------------------------------
@@ -148,16 +148,16 @@ stata_run("summarize")
 #> -------------+---------------------------------------------------------
 #>         carb |         32      2.8125      1.6152          1          8
 stata_run("append using $R_mtcars")
-#> . append using $R_mtcars
+#> append using $R_mtcars
 stata_run("display _N")
-#> . display _N
+#> display _N
 #> 64
 ```
 
 ## knitr
 
-`dostata` integrates with knitr allowing you to run Stata code chunks
-in knitr or rmarkdown documents. To do so, you must first import the
+`dostata` integrates with knitr allowing you to run Stata code chunks in
+knitr or rmarkdown documents. To do so, you must first import the
 package with `library(dostata)` so knitr knows what to do with `stata`
 chunks. Then add a chunk like the following.
 
